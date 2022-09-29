@@ -31,7 +31,7 @@ flask --app app run
 
 ### Notas
 
-O serviço Redis está configurado pra executar com as configurações padrões de instalação.
+##### O serviço Redis está configurado pra executar com as configurações padrões de instalação.
 
 ```python
 import redis
