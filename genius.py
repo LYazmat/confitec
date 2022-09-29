@@ -25,7 +25,7 @@ def get_top_songs_by_artist(id):
         result = response.json()
         artist = result['response']['artist']
 
-        # Check for top 10 songs, sort default is popularity
+        # Check for top 10 songs, default sort is popularity attr
         url_songs = f'https://api.genius.com/artists/{id}/songs'    
         params = {'per_page': '10', 'page': '1'}
         response = requests.get(url_songs, headers=headers, params=params)

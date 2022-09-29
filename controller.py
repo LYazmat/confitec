@@ -4,7 +4,7 @@ import uuid
 import genius
 import redisconn
 
-
+# basically, client instance for check_table
 client = client(
     'dynamodb',
     aws_access_key_id = config.AWS_ACCESS_KEY_ID,
@@ -12,12 +12,16 @@ client = client(
     region_name = config.REGION_NAME
 )
 
+
+# Check table in db => True if exists, False otherwise
 def check_table(table_name):
     response = client.list_tables()
     if table_name in response['TableNames']:
         return True
     return False
 
+
+# resource instance from boto3 for other methods/functions
 resource = resource(
     'dynamodb',
     aws_access_key_id = config.AWS_ACCESS_KEY_ID,
@@ -28,8 +32,10 @@ resource = resource(
 ArtistTable = resource.Table('artists')
 
 
+# Create table artists, check if it'd been created
 def create_table_artists(): 
     if not check_table('artists'):
+
         table = resource.create_table(
             TableName = 'artists',
             KeySchema = [
@@ -50,6 +56,7 @@ def create_table_artists():
             }
         )
 
+        # Need to wait until table is created
         table.wait_until_exists()
 
         return {'msg': 'Table created'}
@@ -57,7 +64,9 @@ def create_table_artists():
     return {'msg': 'Table already exists'}    
 
 
-def write_to_artist(artist, cache):    
+def write_to_artist(artist, cache):
+
+    # Generate a uuid v4
     transaction = str(uuid.uuid4())
     artist['transaction'] = transaction
     ArtistTable.put_item(
@@ -111,17 +120,17 @@ def read_from_artist(id, cache=True):
         if 'Item' in response:
             transaction = response['Item']['transaction']
             if cache:
-                # Search in Redis
+                # Search on Redis
                 artist = redisconn.read(transaction)
                 if not artist:
-                    # Not found in Redis -> search genius
+                    # Not found in Redis -> search in genius
                     artist = genius.get_top_songs_by_artist(id)
                     artist['transaction'] = transaction
                     update_in_artist(artist, cache)
                 else:
                     artist['from_cache'] = True
             else:
-                # Search genius, update dynamo, delete redis
+                # Search on genius, update dynamo[and delete redis]
                 artist = genius.get_top_songs_by_artist(id)
                 artist['transaction'] = transaction
                 update_in_artist(artist, cache)
