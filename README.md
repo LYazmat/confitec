@@ -29,6 +29,25 @@ flask --app app run
 ```
 <br>
 
+### Consumindo a API
+
+##### Para criar a tabela antes de realizar as pesquisas, acessar através de um cliente
+<br>
+```
+GET http://127.0.0.1:5000/
+```
+O retorno informa se a tabela foi criada ou se já existe.
+<br>
+
+##### Para consultar o artista é necessário informar o id, substituindo-o na url da requisição
+<br>
+```
+GET http://127.0.0.1:5000/artist/id
+
+GET http://127.0.0.1:5000/artist/70
+```
+
+
 ### Notas
 
 ##### O serviço Redis está configurado pra executar com as configurações padrões de instalação.
