@@ -1,12 +1,3 @@
-<div align="center">
-
-#### Redes sociais
-
-[![linkedin](https://img.shields.io/badge/Linkedin-FFFFFF?style=flat&logo=linkedin&logoColor=blue)](https://www.linkedin.com/in/marcus-vinicius-de-miranda)
-[![instagram](https://img.shields.io/badge/Instagram-FFFFFF?style=flat&logo=instagram&logoColor=orange)](https://www.instagram.com/marcusmiran/)
-
-</div>
-
 ## Confitec - Teste Desenvolvedor Python
 
 ##### Primeiramente instalar as dependências:
