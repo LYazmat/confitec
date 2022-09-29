@@ -33,6 +33,7 @@ flask --app app run
 
 ##### Para criar a tabela antes de realizar as pesquisas, acessar através de um cliente
 <br>
+
 ```
 GET http://127.0.0.1:5000/
 ```
@@ -41,6 +42,7 @@ O retorno informa se a tabela foi criada ou se já existe.
 
 ##### Para consultar o artista é necessário informar o id, substituindo-o na url da requisição
 <br>
+
 ```
 GET http://127.0.0.1:5000/artist/id
 
