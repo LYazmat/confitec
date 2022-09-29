@@ -16,7 +16,7 @@ pip install -r requirements.txt
 ```
 <br>
 
-##### Criar arquivo config.py de acordo com com config.py.example
+##### Criar arquivo config.py de acordo com config.py.example
 
 ```python
 # AWS
